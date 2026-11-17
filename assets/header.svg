@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="320" viewBox="0 0 1000 320" role="img" aria-labelledby="title desc">
+  <title id="title">RetryX</title>
+  <desc id="desc">RetryX: I try with AI, save it and loop it again. A try, save, loop cycle and a spinning retry arrow counting attempts.</desc>
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#1d1b18" stroke-opacity=".07" stroke-width="1"/>
+    </pattern>
+    <marker id="head" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#1d1b18"/>
+    </marker>
+    <style>
+      .sans { font-family: ui-rounded, "SF Pro Rounded", "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+      .ink { fill: #1d1b18; }
+      .soft { fill: #1d1b18; fill-opacity: .68; }
+      .accent { fill: #e8785a; }
+
+      .chip rect { fill: #fffaf1; stroke: #1d1b18; stroke-width: 2.5; }
+      .chip text { fill: #1d1b18; font-size: 18px; font-weight: 700; letter-spacing: 2px; }
+      .chip .lit { fill: #e8785a; opacity: 0; animation: lit 4.5s infinite; }
+      .c2 .lit { animation-delay: 1.5s; }
+      .c3 .lit { animation-delay: 3s; }
+      @keyframes lit { 0%, 30% { opacity: 1; } 34%, 100% { opacity: 0; } }
+
+      .spin { transform-origin: 830px 150px; animation: spin 1.5s linear infinite; }
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      .n { opacity: 0; animation: count 18s steps(1, end) infinite; }
+      .n2 { animation-delay: 4.5s; }
+      .n3 { animation-delay: 9s; }
+      .n4 { animation-delay: 13.5s; }
+      @keyframes count { 0% { opacity: 1; } 25%, 100% { opacity: 0; } }
+
+      .cursor { animation: blink 1s steps(1, end) infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+
+      @media (prefers-reduced-motion: reduce) {
+        .spin, .cursor, .chip .lit, .n { animation: none; }
+        .c1 .lit, .n1 { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <!-- paper card -->
+  <rect x="6" y="6" width="988" height="308" rx="22" fill="#f4ebdc"/>
+  <rect x="6" y="6" width="988" height="308" rx="22" fill="url(#grid)"/>
+  <rect x="6" y="6" width="988" height="308" rx="22" fill="none" stroke="#1d1b18" stroke-width="3"/>
+
+  <!-- prompt line -->
+  <text x="56" y="62" class="mono soft" font-size="16">~/retryx $ ./run.sh --again<tspan class="cursor"> ▍</tspan></text>
+
+  <!-- wordmark -->
+  <text x="52" y="146" class="sans ink" font-size="92" font-weight="800" letter-spacing="-2">Retry<tspan class="accent">X</tspan></text>
+  <text x="56" y="186" class="sans soft" font-size="22">I try with AI, save it and loop it again.</text>
+
+  <!-- try → save → loop -->
+  <g class="mono">
+    <g class="chip c1">
+      <rect x="56" y="214" width="112" height="44" rx="10"/>
+      <rect class="lit" x="56" y="214" width="112" height="44" rx="10"/>
+      <text x="112" y="242" text-anchor="middle">TRY</text>
+    </g>
+    <path d="M176 236H214" stroke="#1d1b18" stroke-width="2.5" marker-end="url(#head)"/>
+    <g class="chip c2">
+      <rect x="226" y="214" width="112" height="44" rx="10"/>
+      <rect class="lit" x="226" y="214" width="112" height="44" rx="10"/>
+      <text x="282" y="242" text-anchor="middle">SAVE</text>
+    </g>
+    <path d="M346 236H384" stroke="#1d1b18" stroke-width="2.5" marker-end="url(#head)"/>
+    <g class="chip c3">
+      <rect x="396" y="214" width="112" height="44" rx="10"/>
+      <rect class="lit" x="396" y="214" width="112" height="44" rx="10"/>
+      <text x="452" y="242" text-anchor="middle">LOOP</text>
+    </g>
+    <!-- back to TRY -->
+    <path d="M452 264V282Q452 292 442 292H122Q112 292 112 282V270" fill="none" stroke="#1d1b18" stroke-width="2.5" stroke-dasharray="6 6" marker-end="url(#head)"/>
+  </g>
+
+  <!-- retry arrow + attempt counter -->
+  <circle cx="830" cy="150" r="104" fill="#fffaf1" stroke="#1d1b18" stroke-width="3"/>
+  <g class="spin">
+    <path d="M830 76A74 74 0 1 1 762 121" fill="none" stroke="#e8785a" stroke-width="12" stroke-linecap="round"/>
+    <path d="M744 104L770 108L758 132z" fill="#e8785a" stroke="#e8785a" stroke-width="6" stroke-linejoin="round"/>
+  </g>
+  <text x="830" y="136" text-anchor="middle" class="mono soft" font-size="15" letter-spacing="2">ATTEMPT</text>
+  <g class="mono ink" font-size="44" font-weight="700" text-anchor="middle">
+    <text class="n n1" x="830" y="180">#1</text>
+    <text class="n n2" x="830" y="180">#2</text>
+    <text class="n n3" x="830" y="180">#3</text>
+    <text class="n n4" x="830" y="180">#∞</text>
+  </g>
+  <text x="830" y="292" text-anchor="middle" class="mono soft" font-size="15">exit 1 → retry</text>
+</svg>
