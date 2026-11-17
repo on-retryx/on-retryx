@@ -53,9 +53,8 @@ exit 1 → retry
 
 | attempt | what | result |
 |:-:|---|---|
-| #1 | AI, code, crypto, trading, all before graduating | didn't stick, learned a lot |
-| #2 | [Exam Forge](https://github.com/on-retryx/exam-forge) | ✅ shipped |
-| #3 | agent dev team | 🔄 looping |
+| #1 | [Exam Forge](https://github.com/on-retryx/exam-forge) | ✅ shipped |
+| #2 | agent dev team | 🔄 looping |
 | #n | whatever breaks next | ⏳ |
 
 ### 🧰 toolbox
