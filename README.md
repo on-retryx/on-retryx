@@ -73,6 +73,7 @@ These days I build small dev tools and send pull requests to open-source project
   <img src="https://img.shields.io/badge/Linux-1d1b18?style=flat-square&logo=linux&logoColor=f4ebdc" alt="Linux">
   <img src="https://img.shields.io/badge/Tailscale-1d1b18?style=flat-square&logo=tailscale&logoColor=f4ebdc" alt="Tailscale">
   <img src="https://img.shields.io/badge/Claude_Code-e8785a?style=flat-square&logo=claude&logoColor=white" alt="Claude Code">
+  <img src="https://img.shields.io/badge/Codex-1d1b18?style=flat-square&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZD0iTTQgNmw2IDYtNiA2IiBmaWxsPSJub25lIiBzdHJva2U9IiNmNGViZGMiIHN0cm9rZS13aWR0aD0iMi42IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMTIgMThoOCIgc3Ryb2tlPSIjZjRlYmRjIiBzdHJva2Utd2lkdGg9IjIuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8%2BPC9zdmc%2B" alt="Codex">
 </p>
 
 ### 📡 find me

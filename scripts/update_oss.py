@@ -70,17 +70,15 @@ def card(prs, stars):
     review = sum(p["state"] != "merged" for p in prs)
     add = sum(p["add"] for p in prs)
     dele = sum(p["del"] for p in prs)
-    star_total = sum(stars.values())
     tiles = [
         (str(merged), "MERGED PRs", "#e8785a"),
         (str(review), "IN REVIEW", "#1d1b18"),
         (f"+{short(add)}", f"LINES (−{short(dele)})", "#1d1b18"),
-        (short(star_total), "STARS ON REPOS", "#1d1b18"),
     ]
     w, h, pad, gap = 1000, 190, 36, 18
-    tw = (w - 2 * pad - 3 * gap) / 4
+    tw = (w - 2 * pad - (len(tiles) - 1) * gap) / len(tiles)
     out = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="Open source: {merged} merged PRs, {review} in review, +{add} lines, {star_total} stars on contributed repos">',
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="Open source: {merged} merged PRs, {review} in review, +{add} lines changed">',
         '<style>.m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}.s{font-family:ui-rounded,"SF Pro Rounded","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}</style>',
         f'<rect x="3" y="3" width="{w - 6}" height="{h - 6}" rx="20" fill="#f4ebdc" stroke="#1d1b18" stroke-width="3"/>',
         f'<text x="{pad}" y="46" class="m" font-size="15" fill="#1d1b18" fill-opacity=".68">$ git log --author={USER} --upstream   # open source, live from the GitHub API</text>',

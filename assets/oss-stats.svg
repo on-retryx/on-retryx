@@ -1,17 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="190" viewBox="0 0 1000 190" role="img" aria-label="Open source: 2 merged PRs, 3 in review, +797 lines, 8368 stars on contributed repos">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="190" viewBox="0 0 1000 190" role="img" aria-label="Open source: 2 merged PRs, 3 in review, +797 lines changed">
 <style>.m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}.s{font-family:ui-rounded,"SF Pro Rounded","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}</style>
 <rect x="3" y="3" width="994" height="184" rx="20" fill="#f4ebdc" stroke="#1d1b18" stroke-width="3"/>
 <text x="36" y="46" class="m" font-size="15" fill="#1d1b18" fill-opacity=".68">$ git log --author=on-retryx --upstream   # open source, live from the GitHub API</text>
-<rect x="36.0" y="66" width="218.5" height="96" rx="12" fill="#fffaf1" stroke="#1d1b18" stroke-width="2.5"/>
-<text x="145.2" y="120" text-anchor="middle" class="s" font-size="40" font-weight="800" fill="#e8785a">2</text>
-<text x="145.2" y="146" text-anchor="middle" class="m" font-size="13" letter-spacing="1.5" fill="#1d1b18" fill-opacity=".7">MERGED PRs</text>
-<rect x="272.5" y="66" width="218.5" height="96" rx="12" fill="#fffaf1" stroke="#1d1b18" stroke-width="2.5"/>
-<text x="381.8" y="120" text-anchor="middle" class="s" font-size="40" font-weight="800" fill="#1d1b18">3</text>
-<text x="381.8" y="146" text-anchor="middle" class="m" font-size="13" letter-spacing="1.5" fill="#1d1b18" fill-opacity=".7">IN REVIEW</text>
-<rect x="509.0" y="66" width="218.5" height="96" rx="12" fill="#fffaf1" stroke="#1d1b18" stroke-width="2.5"/>
-<text x="618.2" y="120" text-anchor="middle" class="s" font-size="40" font-weight="800" fill="#1d1b18">+797</text>
-<text x="618.2" y="146" text-anchor="middle" class="m" font-size="13" letter-spacing="1.5" fill="#1d1b18" fill-opacity=".7">LINES (−63)</text>
-<rect x="745.5" y="66" width="218.5" height="96" rx="12" fill="#fffaf1" stroke="#1d1b18" stroke-width="2.5"/>
-<text x="854.8" y="120" text-anchor="middle" class="s" font-size="40" font-weight="800" fill="#1d1b18">8.4K</text>
-<text x="854.8" y="146" text-anchor="middle" class="m" font-size="13" letter-spacing="1.5" fill="#1d1b18" fill-opacity=".7">STARS ON REPOS</text>
+<rect x="36.0" y="66" width="297.3" height="96" rx="12" fill="#fffaf1" stroke="#1d1b18" stroke-width="2.5"/>
+<text x="184.7" y="120" text-anchor="middle" class="s" font-size="40" font-weight="800" fill="#e8785a">2</text>
+<text x="184.7" y="146" text-anchor="middle" class="m" font-size="13" letter-spacing="1.5" fill="#1d1b18" fill-opacity=".7">MERGED PRs</text>
+<rect x="351.3" y="66" width="297.3" height="96" rx="12" fill="#fffaf1" stroke="#1d1b18" stroke-width="2.5"/>
+<text x="500.0" y="120" text-anchor="middle" class="s" font-size="40" font-weight="800" fill="#1d1b18">3</text>
+<text x="500.0" y="146" text-anchor="middle" class="m" font-size="13" letter-spacing="1.5" fill="#1d1b18" fill-opacity=".7">IN REVIEW</text>
+<rect x="666.7" y="66" width="297.3" height="96" rx="12" fill="#fffaf1" stroke="#1d1b18" stroke-width="2.5"/>
+<text x="815.3" y="120" text-anchor="middle" class="s" font-size="40" font-weight="800" fill="#1d1b18">+797</text>
+<text x="815.3" y="146" text-anchor="middle" class="m" font-size="13" letter-spacing="1.5" fill="#1d1b18" fill-opacity=".7">LINES (−63)</text>
 </svg>
