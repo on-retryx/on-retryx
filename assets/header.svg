@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="320" viewBox="0 0 1000 320" role="img" aria-labelledby="title desc">
   <title id="title">RetryX</title>
-  <desc id="desc">RetryX: I try with AI, save it and loop it again. A try, save, loop cycle and a spinning retry arrow counting attempts.</desc>
+  <desc id="desc">RetryX: I try, save it and loop it again. A try, save, loop cycle and a spinning retry arrow counting attempts.</desc>
   <defs>
     <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
       <path d="M24 0H0V24" fill="none" stroke="#1d1b18" stroke-opacity=".07" stroke-width="1"/>
@@ -51,7 +51,7 @@
 
   <!-- wordmark -->
   <text x="52" y="146" class="sans ink" font-size="92" font-weight="800" letter-spacing="-2">Retry<tspan class="accent">X</tspan></text>
-  <text x="56" y="186" class="sans soft" font-size="22">I try with AI, save it and loop it again.</text>
+  <text x="56" y="186" class="sans soft" font-size="22">I try, save it and loop it again.</text>
 
   <!-- try → save → loop -->
   <g class="mono">
