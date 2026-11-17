@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="190" viewBox="0 0 1000 190" role="img" aria-label="Open source: 2 merged PRs, 3 in review, +797 lines, 8367 stars on contributed repos">
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="190" viewBox="0 0 1000 190" role="img" aria-label="Open source: 2 merged PRs, 3 in review, +797 lines, 8368 stars on contributed repos">
 <style>.m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}.s{font-family:ui-rounded,"SF Pro Rounded","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}</style>
 <rect x="3" y="3" width="994" height="184" rx="20" fill="#f4ebdc" stroke="#1d1b18" stroke-width="3"/>
 <text x="36" y="46" class="m" font-size="15" fill="#1d1b18" fill-opacity=".68">$ git log --author=on-retryx --upstream   # open source, live from the GitHub API</text>
