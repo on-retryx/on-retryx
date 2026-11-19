@@ -7,7 +7,11 @@ Reads public data from the GitHub API (stdlib only), then writes:
 
 Only PRs to repositories owned by someone else are counted. PRs closed without
 merging are left out of both the card and the table.
+
+The card uses the RetryX Pop Noir kit; brand fonts from assets/fonts are
+embedded so the SVG looks the same in every browser.
 """
+import base64
 import json
 import os
 import re
@@ -21,7 +25,12 @@ USER = os.environ.get("PROFILE_USER", "on-retryx")
 ROOT = Path(__file__).resolve().parent.parent
 README = ROOT / "README.md"
 CARD = ROOT / "assets" / "oss-stats.svg"
+FONTS = ROOT / "assets" / "fonts"
 START, END = "<!-- OSS:START -->", "<!-- OSS:END -->"
+
+# RetryX Pop Noir (dark)
+BG, SURFACE, LINE, INK, MUTED = "#0B0B0D", "#17171B", "#2A2A31", "#F5F5F0", "#A1A1AA"
+ACCENT, DONE, YELLOW = "#FF3D7F", "#39FF88", "#FFD23F"
 
 
 def api(path):
@@ -65,30 +74,45 @@ def short(n):
     return f"{n / 1000:.1f}K".replace(".0K", "K") if n >= 1000 else str(n)
 
 
+def font_faces():
+    faces = [("Archivo Black", 400, "archivo-black"), ("Space Mono", 400, "spacemono-400"), ("Space Mono", 700, "spacemono-700")]
+    out = []
+    for family, weight, name in faces:
+        data = base64.b64encode((FONTS / f"{name}.woff2").read_bytes()).decode()
+        out.append(f'@font-face{{font-family:"{family}";font-weight:{weight};src:url(data:font/woff2;base64,{data}) format("woff2")}}')
+    return "".join(out)
+
+
 def card(prs, stars):
     merged = sum(p["state"] == "merged" for p in prs)
     review = sum(p["state"] != "merged" for p in prs)
     add = sum(p["add"] for p in prs)
     dele = sum(p["del"] for p in prs)
     tiles = [
-        (str(merged), "MERGED PRs", "#e8785a"),
-        (str(review), "IN REVIEW", "#1d1b18"),
-        (f"+{short(add)}", f"LINES (−{short(dele)})", "#1d1b18"),
+        (str(merged), "MERGED PRs", DONE),
+        (str(review), "IN REVIEW", YELLOW),
+        (f"+{short(add)}", f"LINES (−{short(dele)})", INK),
     ]
     w, h, pad, gap = 1000, 190, 36, 18
     tw = (w - 2 * pad - (len(tiles) - 1) * gap) / len(tiles)
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="Open source: {merged} merged PRs, {review} in review, +{add} lines changed">',
-        '<style>.m{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace}.s{font-family:ui-rounded,"SF Pro Rounded","Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}</style>',
-        f'<rect x="3" y="3" width="{w - 6}" height="{h - 6}" rx="20" fill="#f4ebdc" stroke="#1d1b18" stroke-width="3"/>',
-        f'<text x="{pad}" y="46" class="m" font-size="15" fill="#1d1b18" fill-opacity=".68">$ git log --author={USER} --upstream   # open source, live from the GitHub API</text>',
+        f'<defs><style>{font_faces()}'
+        '.m{font-family:"Space Mono",ui-monospace,Menlo,Consolas,monospace;font-weight:400}'
+        '.b{font-family:"Space Mono",ui-monospace,Menlo,Consolas,monospace;font-weight:700}'
+        '.s{font-family:"Archivo Black",system-ui,sans-serif}</style>'
+        f'<pattern id="dots" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="1.6" fill="{ACCENT}" fill-opacity=".2"/></pattern></defs>',
+        f'<rect width="{w}" height="{h}" rx="20" fill="{BG}"/>',
+        f'<rect width="{w}" height="{h}" rx="20" fill="url(#dots)"/>',
+        f'<text x="{pad}" y="46" class="m" font-size="15" fill="{MUTED}"><tspan fill="{ACCENT}">$</tspan> git log --author={USER} --upstream   # open source, live from the GitHub API</text>',
     ]
     for i, (big, label, color) in enumerate(tiles):
         x = pad + i * (tw + gap)
         out += [
-            f'<rect x="{x:.1f}" y="66" width="{tw:.1f}" height="96" rx="12" fill="#fffaf1" stroke="#1d1b18" stroke-width="2.5"/>',
-            f'<text x="{x + tw / 2:.1f}" y="120" text-anchor="middle" class="s" font-size="40" font-weight="800" fill="{color}">{escape(big)}</text>',
-            f'<text x="{x + tw / 2:.1f}" y="146" text-anchor="middle" class="m" font-size="13" letter-spacing="1.5" fill="#1d1b18" fill-opacity=".7">{escape(label)}</text>',
+            f'<rect x="{x:.1f}" y="66" width="{tw:.1f}" height="96" rx="12" fill="{SURFACE}" stroke="{LINE}" stroke-width="1.5"/>',
+            f'<rect x="{x + 18:.1f}" y="88" width="4" height="52" rx="2" fill="{color}"/>',
+            f'<text x="{x + tw / 2:.1f}" y="121" text-anchor="middle" class="s" font-size="40" fill="{color}">{escape(big)}</text>',
+            f'<text x="{x + tw / 2:.1f}" y="147" text-anchor="middle" class="b" font-size="13" letter-spacing="1.5" fill="{MUTED}">{escape(label)}</text>',
         ]
     out.append("</svg>")
     return "\n".join(out) + "\n"
@@ -96,9 +120,9 @@ def card(prs, stars):
 
 def table(prs, stars):
     badge = {
-        "merged": "![merged](https://img.shields.io/badge/merged-8250df?style=flat-square)",
-        "open": "![in review](https://img.shields.io/badge/in_review-1f883d?style=flat-square)",
-        "draft": "![draft](https://img.shields.io/badge/draft-6e7781?style=flat-square)",
+        "merged": "![done: merged](https://img.shields.io/badge/%E2%9C%93_merged-39FF88?style=flat-square)",
+        "open": "![in review](https://img.shields.io/badge/in_review-FFD23F?style=flat-square)",
+        "draft": "![draft](https://img.shields.io/badge/draft-3F3F46?style=flat-square)",
     }
     rows = ["| | project | pull request | status | diff |", "|:-:|---|---|:-:|--:|"]
     for repo in dict.fromkeys(p["repo"] for p in prs):  # repos in table order
