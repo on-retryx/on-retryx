@@ -24,11 +24,8 @@ These days I build small dev tools and send pull requests to open-source project
 <!-- OSS:START -->
 | | project | pull request | status | diff |
 |:-:|---|---|:-:|--:|
-| <img src="https://github.com/GoogleChrome.png?size=40" width="20" alt=""> | [GoogleChrome/modern-web-guidance-src](https://github.com/GoogleChrome/modern-web-guidance-src) <sub>★ 8.5K</sub> | [validation: require macro-referenced features in web-feature-ids](https://github.com/GoogleChrome/modern-web-guidance-src/pull/3592) <sub>#3592</sub> | ![merged](https://img.shields.io/badge/merged-8250df?style=flat-square) | `+120 −21` |
+| <img src="https://github.com/GoogleChrome.png?size=40" width="20" alt=""> | [GoogleChrome/modern-web-guidance-src](https://github.com/GoogleChrome/modern-web-guidance-src) <sub>★ 8.9K</sub> | [validation: require macro-referenced features in web-feature-ids](https://github.com/GoogleChrome/modern-web-guidance-src/pull/3592) <sub>#3592</sub> | ![merged](https://img.shields.io/badge/merged-8250df?style=flat-square) | `+120 −21` |
 |  |  | [analyzing: ignore &lt;script&gt;/&lt;style&gt; blocks inside HTML comments](https://github.com/GoogleChrome/modern-web-guidance-src/pull/3588) <sub>#3588</sub> | ![merged](https://img.shields.io/badge/merged-8250df?style=flat-square) | `+73 −8` |
-|  |  | [analyzing: judge explicit file targets by the file itself](https://github.com/GoogleChrome/modern-web-guidance-src/pull/3590) <sub>#3590</sub> | ![in review](https://img.shields.io/badge/in_review-1f883d?style=flat-square) | `+60 −7` |
-|  |  | [analyzing: apply element rules to JSX in .js/.mjs/.cjs files](https://github.com/GoogleChrome/modern-web-guidance-src/pull/3589) <sub>#3589</sub> | ![in review](https://img.shields.io/badge/in_review-1f883d?style=flat-square) | `+160 −12` |
-|  |  | [cli(retrieve): suggest similar guide IDs and accept path-like IDs](https://github.com/GoogleChrome/modern-web-guidance-src/pull/3591) <sub>#3591</sub> | ![draft](https://img.shields.io/badge/draft-6e7781?style=flat-square) | `+384 −15` |
 <!-- OSS:END -->
 
 <sub>Refreshed daily from the GitHub API by <a href="scripts/update_oss.py">a small script</a>. Only PRs to other people's repos count; PRs closed without merging are not listed.</sub>
