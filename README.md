@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="assets/header.svg" width="100%" alt="RetryX: I try whatever comes to mind, the more I try, the more I learn">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="assets/header-light.svg">
+    <img src="assets/header.svg" width="100%" alt="RetryX: I try whatever comes to mind, the more I try, the more I learn">
+  </picture>
 </p>
 
 <p align="center">
@@ -18,7 +21,10 @@ These days I build small dev tools and send pull requests to open-source project
 ### `↻` open source
 
 <p align="center">
-  <img src="assets/oss-stats.svg" width="100%" alt="Open-source contribution stats">
+  <picture>
+    <source media="(prefers-color-scheme: light)" srcset="assets/oss-stats-light.svg">
+    <img src="assets/oss-stats.svg" width="100%" alt="Open-source contribution stats">
+  </picture>
 </p>
 
 <!-- OSS:START -->
@@ -56,9 +62,7 @@ These days I build small dev tools and send pull requests to open-source project
 |:-:|---|:-:|
 | #1 | [Exam Forge](https://github.com/on-retryx/exam-forge), my first open-source tool | ![done](https://img.shields.io/badge/%E2%9C%93_done-39FF88?style=flat-square) |
 | #2 | first PRs merged into [GoogleChrome/modern-web-guidance-src](https://github.com/GoogleChrome/modern-web-guidance-src) | ![done](https://img.shields.io/badge/%E2%9C%93_done-39FF88?style=flat-square) |
-| #3 | three more PRs there, closed: the project now asks for an approved issue first | ![fail](https://img.shields.io/badge/%E2%9C%97_fail-FF3B3B?style=flat-square) |
-| #4 | asked to pick up [an issue](https://github.com/GoogleChrome/modern-web-guidance-src/issues/1872) the right way, the PR is ready | ![retry](https://img.shields.io/badge/%E2%86%BB_retry-FF3D7F?style=flat-square) |
-| #5 | a dev team tool that logs, reviews and releases itself | ![retry](https://img.shields.io/badge/%E2%86%BB_retry-FF3D7F?style=flat-square) |
+| #3 | a dev team tool that logs, reviews and releases itself | ![retry](https://img.shields.io/badge/%E2%86%BB_retry-FF3D7F?style=flat-square) |
 | #n | whatever breaks next | … |
 
 ### `$` toolbox

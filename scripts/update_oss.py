@@ -2,7 +2,8 @@
 """Refresh the open-source contribution card and PR table on the profile README.
 
 Reads public data from the GitHub API (stdlib only), then writes:
-  - assets/oss-stats.svg              the stats card
+  - assets/oss-stats.svg              the stats card (dark theme)
+  - assets/oss-stats-light.svg        the same card for GitHub's light theme
   - README.md between OSS markers     one row per merged or open PR
 
 Only PRs to repositories owned by someone else are counted. PRs closed without
@@ -24,13 +25,17 @@ from pathlib import Path
 USER = os.environ.get("PROFILE_USER", "on-retryx")
 ROOT = Path(__file__).resolve().parent.parent
 README = ROOT / "README.md"
-CARD = ROOT / "assets" / "oss-stats.svg"
+CARDS = {"dark": ROOT / "assets" / "oss-stats.svg", "light": ROOT / "assets" / "oss-stats-light.svg"}
 FONTS = ROOT / "assets" / "fonts"
 START, END = "<!-- OSS:START -->", "<!-- OSS:END -->"
 
-# RetryX Pop Noir (dark)
-BG, SURFACE, LINE, INK, MUTED = "#0B0B0D", "#17171B", "#2A2A31", "#F5F5F0", "#A1A1AA"
-ACCENT, DONE, YELLOW = "#FF3D7F", "#39FF88", "#FFD23F"
+# RetryX Pop Noir kit. Yellow stays a block on light backgrounds, never text.
+THEMES = {
+    "dark": {"bg": "#0B0B0D", "surface": "#17171B", "line": "#2A2A31", "ink": "#F5F5F0", "muted": "#A1A1AA",
+             "accent": "#FF3D7F", "done": "#39FF88", "review": "#FFD23F", "review_text": "#FFD23F", "dots": ".2"},
+    "light": {"bg": "#FAFAF7", "surface": "#FFFFFF", "line": "#E4E4E7", "ink": "#0B0B0D", "muted": "#52525B",
+              "accent": "#FF3D7F", "done": "#00A341", "review": "#FFD23F", "review_text": "#0B0B0D", "dots": ".3"},
+}
 
 
 def api(path):
@@ -83,15 +88,16 @@ def font_faces():
     return "".join(out)
 
 
-def card(prs, stars):
+def card(prs, stars, theme="dark"):
+    t = THEMES[theme]
     merged = sum(p["state"] == "merged" for p in prs)
     review = sum(p["state"] != "merged" for p in prs)
     add = sum(p["add"] for p in prs)
     dele = sum(p["del"] for p in prs)
     tiles = [
-        (str(merged), "MERGED PRs", DONE),
-        (str(review), "IN REVIEW", YELLOW),
-        (f"+{short(add)}", f"LINES (−{short(dele)})", INK),
+        (str(merged), "MERGED PRs", t["done"], t["done"]),
+        (str(review), "IN REVIEW", t["review_text"], t["review"]),
+        (f"+{short(add)}", f"LINES (−{short(dele)})", t["ink"], t["ink"]),
     ]
     w, h, pad, gap = 1000, 190, 36, 18
     tw = (w - 2 * pad - (len(tiles) - 1) * gap) / len(tiles)
@@ -101,18 +107,18 @@ def card(prs, stars):
         '.m{font-family:"Space Mono",ui-monospace,Menlo,Consolas,monospace;font-weight:400}'
         '.b{font-family:"Space Mono",ui-monospace,Menlo,Consolas,monospace;font-weight:700}'
         '.s{font-family:"Archivo Black",system-ui,sans-serif}</style>'
-        f'<pattern id="dots" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="1.6" fill="{ACCENT}" fill-opacity=".2"/></pattern></defs>',
-        f'<rect width="{w}" height="{h}" rx="20" fill="{BG}"/>',
+        f'<pattern id="dots" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="1.6" fill="{t["accent"]}" fill-opacity="{t["dots"]}"/></pattern></defs>',
+        f'<rect x=".75" y=".75" width="{w - 1.5}" height="{h - 1.5}" rx="20" fill="{t["bg"]}" stroke="{t["line"] if theme == "light" else t["bg"]}" stroke-width="1.5"/>',
         f'<rect width="{w}" height="{h}" rx="20" fill="url(#dots)"/>',
-        f'<text x="{pad}" y="46" class="m" font-size="15" fill="{MUTED}"><tspan fill="{ACCENT}">$</tspan> git log --author={USER} --upstream   # open source, live from the GitHub API</text>',
+        f'<text x="{pad}" y="46" class="m" font-size="15" fill="{t["muted"]}"><tspan fill="{t["accent"]}">$</tspan> git log --author={USER} --upstream   # open source, live from the GitHub API</text>',
     ]
-    for i, (big, label, color) in enumerate(tiles):
+    for i, (big, label, color, strip) in enumerate(tiles):
         x = pad + i * (tw + gap)
         out += [
-            f'<rect x="{x:.1f}" y="66" width="{tw:.1f}" height="96" rx="12" fill="{SURFACE}" stroke="{LINE}" stroke-width="1.5"/>',
-            f'<rect x="{x + 18:.1f}" y="88" width="4" height="52" rx="2" fill="{color}"/>',
+            f'<rect x="{x:.1f}" y="66" width="{tw:.1f}" height="96" rx="12" fill="{t["surface"]}" stroke="{t["line"]}" stroke-width="1.5"/>',
+            f'<rect x="{x + 18:.1f}" y="88" width="4" height="52" rx="2" fill="{strip}"/>',
             f'<text x="{x + tw / 2:.1f}" y="121" text-anchor="middle" class="s" font-size="40" fill="{color}">{escape(big)}</text>',
-            f'<text x="{x + tw / 2:.1f}" y="147" text-anchor="middle" class="b" font-size="13" letter-spacing="1.5" fill="{MUTED}">{escape(label)}</text>',
+            f'<text x="{x + tw / 2:.1f}" y="147" text-anchor="middle" class="b" font-size="13" letter-spacing="1.5" fill="{t["muted"]}">{escape(label)}</text>',
         ]
     out.append("</svg>")
     return "\n".join(out) + "\n"
@@ -144,7 +150,8 @@ def table(prs, stars):
 
 def main():
     prs, stars = collect()
-    CARD.write_text(card(prs, stars), encoding="utf-8")
+    for theme, path in CARDS.items():
+        path.write_text(card(prs, stars, theme), encoding="utf-8")
     text = README.read_text(encoding="utf-8")
     block = f"{START}\n{table(prs, stars)}\n{END}"
     new, n = re.subn(re.escape(START) + r".*?" + re.escape(END), lambda _: block, text, flags=re.S)
